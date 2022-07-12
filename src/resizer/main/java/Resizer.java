@@ -1,16 +1,9 @@
 package resizer.main.java;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -19,12 +12,11 @@ public class Resizer {
 	public static final File IO_FILE = new File(TARGET_FILE.toString()+File.separator+"io_file");
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		int i = 0;
-		File[] files = getFiles(TARGET_FILE);
 		File[] infiles = getFiles(IO_FILE);
 		File newFile = IO_FILE;
 		if(!newFile.exists()&&!newFile.isDirectory()) {
 			newFile.mkdir();
-			JOptionPane.showMessageDialog(null, "将你的图片放入 "+TARGET_FILE.toString()+File.separator+"in 文件夹, 然后再次运行");
+			JOptionPane.showMessageDialog(null, "将你的图片放入 "+IO_FILE.toString()+File.separator+" 文件夹, 然后再次运行");
 			return;
 		}
 		for(File file:infiles){
