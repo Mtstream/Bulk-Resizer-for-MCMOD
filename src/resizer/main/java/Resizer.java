@@ -23,7 +23,7 @@ public class Resizer {
 		for(File file:infiles){
 			//取得文件名称
 			String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
-			//调整图片尺寸并保持，不是图片则跳过
+			//调整图片尺寸并写入，不是图片则跳过
 			try {
 				BufferedImage img = readImage(file);
 				if(img!=null) {
