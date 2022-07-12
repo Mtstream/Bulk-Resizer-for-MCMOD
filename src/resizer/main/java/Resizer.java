@@ -14,14 +14,16 @@ public class Resizer {
 		int i = 0;
 		File[] infiles = getFiles(IO_FILE);
 		File newFile = IO_FILE;
+		//检查io_file文件夹是否存在，否则新建
 		if(!newFile.exists()&&!newFile.isDirectory()) {
 			newFile.mkdir();
 			JOptionPane.showMessageDialog(null, "将你的图片放入 "+IO_FILE.toString()+File.separator+" 文件夹, 然后再次运行");
 			return;
 		}
 		for(File file:infiles){
-			System.out.println(file.toString());
+			//取得文件名称
 			String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
+			//调整图片尺寸并保持，不是图片则跳过
 			try {
 				BufferedImage img = readImage(file);
 				if(img!=null) {
@@ -36,18 +38,22 @@ public class Resizer {
 		JOptionPane.showMessageDialog(null, i > 0?"调整了"+i+"张图片，请在"+IO_FILE.toString()+"中查看":IO_FILE.toString()+"中没有图片");
 		
 	}
+	//取得文件
 	public static File[] getFiles(File path){
 		File[] files = path.listFiles();
 		return files;
 	}
+	//读取文件的图片
 	public static BufferedImage readImage(File file) throws FileNotFoundException, IOException {
 		BufferedImage image = ImageIO.read(file);
 		return image;
 	}
+	//写入png图片至文件夹
 	public static void writeImage(BufferedImage img,String str) throws IOException {
 		File file = IO_FILE;
 		ImageIO.write(img, "png", new File(file.toString()+File.separator+str+".png"));
 	}
+	//修改图片的尺寸
 	public static BufferedImage resizeImage(BufferedImage bimg,int size){
 		Image img = bimg.getScaledInstance(size, size, Image.SCALE_DEFAULT);
 		BufferedImage outImg = new BufferedImage(size, size, BufferedImage.TRANSLUCENT);
